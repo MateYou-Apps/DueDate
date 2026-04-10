@@ -10,14 +10,14 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/MateYouApps/DueDate/releases/latest">
-        <img src="https://img.shields.io/github/v/release/MateYouApps/DueDate?include_prereleases&logo=github&style=for-the-badge&color=green&label=Latest%20Release" alt="Release">
+    <a href="https://github.com/MateYou-Apps/DueDate/releases/latest">
+        <img src="https://img.shields.io/github/v/release/MateYou-Apps/DueDate?include_prereleases&logo=github&style=for-the-badge&color=green&label=Latest%20Release" alt="Release">
     </a>
-    <a href="https://github.com/MateYouApps/DueDate/releases">
-        <img src="https://img.shields.io/github/downloads/MateYouApps/DueDate/total?logo=github&style=for-the-badge&color=blue&label=Downloads" alt="Downloads">
+    <a href="https://github.com/MateYou-Apps/DueDate/releases">
+        <img src="https://img.shields.io/github/downloads/MateYou-Apps/DueDate/total?logo=github&style=for-the-badge&color=blue&label=Downloads" alt="Downloads">
     </a>
-    <a href="https://github.com/MateYouApps/DueDate/releases">
-        <img src="https://img.shields.io/github/license/MateYouApps/DueDate?style=for-the-badge&color=orange&label=License" alt="License">
+    <a href="https://github.com/MateYou-Apps/DueDate/releases">
+        <img src="https://img.shields.io/github/license/MateYou-Apps/DueDate?style=for-the-badge&color=orange&label=License" alt="License">
     </a>
 </p>
 
@@ -79,7 +79,7 @@ To build DueDate on your machine:
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/MateYouApps/DueDate.git
+git clone https://github.com/MateYou-Apps/DueDate.git
 cd DueDate
 ```
 
