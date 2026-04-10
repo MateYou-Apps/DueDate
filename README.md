@@ -37,7 +37,7 @@
 DueDate is designed to simplify your financial life by automating credit card bill tracking without compromising your privacy.
 
 ### ⚡ Smart Automation
-- **Auto-Detection:** Effortlessly identifies credit card bills from bank SMS alerts in real-time.
+- **Auto-Detection:** Effortlessly identifies credit card bills from bank SMS alerts with **global currency support**.
 - **Custom Templates:** Unsupported bank sms? Create your own parsing rules using an intuitive visual configuration tool.
 - **Partial Payments:** Track partial payments on your bills. Log them without moving the bill to 'Paid' until it's fully settled.
 - **Smart Status:** Instantly see which bills are due, late, or paid at a glance with color-coded indicators.
@@ -53,6 +53,24 @@ DueDate is designed to simplify your financial life by automating credit card bi
 - **Biometric Security:** Protect your sensitive financial information with an optional app lock using Fingerprint.
 - **Material You:** Fully supports dynamic theming. The app adapts to your wallpaper for a personalized aesthetic.
 - **Portable Backups:** Export and import backups of your bills, banks, and custom configurations.
+
+<br>
+
+
+<p align="center">
+    <a href="https://nicegist.github.io/a746a7dddc704cb496fd5c938b463926" target="_blank">
+        <img src="https://img.shields.io/badge/User%20Guide-AAEEAA?style=for-the-badge&logo=googlekeep&logoColor=000000" alt="User Guide">
+    </a>
+    <a href="https://nicegist.github.io/36bdd11f7050b94b38b1342fff686aa8" target="_blank">
+        <img src="https://img.shields.io/badge/Credits-AAEEAA?style=for-the-badge&logo=read.cv&logoColor=000000" alt="Credits">
+    </a>
+    <a href="https://nicegist.github.io/a639614b1f3b83c8258dc680335e4dc9" target="_blank">
+        <img src="https://img.shields.io/badge/Terms%20%26%20Privacy-AAEEAA?style=for-the-badge&logo=googledocs&logoColor=000000" alt="Terms & Privacy">
+    </a>
+</p>
+
+
+<br>
 
 ## Tech Stack
 
@@ -75,7 +93,7 @@ To build DueDate on your machine:
 
 ### 1. Prerequisites
 - **Android Studio:** Ladybug (2024.2.1) or newer.
-- **JDK:** Java 17 toolchain.
+- **JDK:** Java 21 toolchain.
 
 ### 2. Clone the Repository
 ```bash
