@@ -1,0 +1,24 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.log
+
+# Build Outputs
+/app/release/
+/app/build/
+
+# Secrets
+secrets.properties
+*.jks
+*.keystore
+
+# Local Scripts (Optional - uncomment if you want to keep them local)
+test_regex.kts
+test_parser.kts

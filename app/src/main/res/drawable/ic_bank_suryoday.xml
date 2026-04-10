@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <group
+        android:translateX="248"
+        android:translateY="266">
+        <!-- Main Circle -->
+        <path
+            android:pathData="M8.17,-9.54m-209.84,0a209.84,209.84 0,1 1,419.68,0a209.84,209.84 0,1 1,-419.68,0"
+            android:strokeColor="#FF000000"
+            android:strokeWidth="27"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"/>
+        <!-- Bird 1 -->
+        <path
+            android:pathData="M-0.92,-120.37 Q51.7,-116.42 64.1,-82.43 Q86.87,-105.39 122.63,-93.94"
+            android:strokeColor="#FF000000"
+            android:strokeWidth="27"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"/>
+        <!-- Bird 2 (with rotation and translation) -->
+        <group
+            android:translateX="-46.34"
+            android:translateY="63.24"
+            android:rotation="-4.5">
+            <path
+                android:pathData="M10.65,-116.82 Q53.41,-113.6 63.49,-85.98 Q82,-104.64 111.06,-95.34"
+                android:strokeColor="#FF000000"
+                android:strokeWidth="27"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"/>
+        </group>
+    </group>
+</vector>

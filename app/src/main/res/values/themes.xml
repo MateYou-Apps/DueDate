@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DueDate" parent="android:Theme.Material.NoActionBar">
+        <!-- We use Compose for UI, so we just need a standard parent theme -->
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Background from system theme (Material You) -->
+        <item name="windowSplashScreenBackground">?android:attr/colorBackground</item>
+        <!-- Icon that will adapt its color based on the theme -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <!-- Theme to switch to after the splash screen is dismissed -->
+        <item name="postSplashScreenTheme">@style/Theme.DueDate</item>
+    </style>
+</resources>
