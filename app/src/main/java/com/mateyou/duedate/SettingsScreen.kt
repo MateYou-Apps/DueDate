@@ -68,6 +68,7 @@ import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.Sms
 import androidx.compose.material.icons.outlined.Sync
 import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -362,13 +363,13 @@ fun SettingsScreen(
                 )
                 ListItem(
                     headlineContent = { Text("Parse Existing SMS") },
-                    supportingContent = { Text("Scan history for recent bills", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
+                    supportingContent = { Text("Scan your inbox for historical bills", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
                     leadingContent = { Icon(Icons.Outlined.Search, null) },
                     trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable { onOpenParseExistingSms() }.padding(horizontal = 4.dp)
                 )
-                
+
                 ListItem(
                     headlineContent = { Text("Date Format") },
                     supportingContent = { Text(if (dateFormat == DateFormatPreference.DAY_MONTH) "Prefer Day/Month (e.g. 25/05)" else "Prefer Month/Day (e.g. 05/25)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
@@ -672,6 +673,17 @@ fun SettingsScreen(
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                             appVersionTapCount = 0
                         }
+                    }.padding(horizontal = 4.dp)
+                )
+                ListItem(
+                    headlineContent = { Text("Check for Updates") },
+                    supportingContent = { Text("See the latest version on GitHub", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
+                    leadingContent = { Icon(Icons.Outlined.Update, null) },
+                    trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) },
+                    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                    modifier = Modifier.clickable {
+                        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/MateYou-Apps/DueDate/releases/latest".toUri())
+                        context.startActivity(intent)
                     }.padding(horizontal = 4.dp)
                 )
                 ListItem(
