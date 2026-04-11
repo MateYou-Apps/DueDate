@@ -93,6 +93,7 @@ class DueDateViewModel(application: Application) : AndroidViewModel(application)
     val dateFormat = _dateFormat.asStateFlow()
 
     val activeDueDates: Flow<List<DueDate>>
+    val allCalendarBills: Flow<List<DueDate>>
     val filteredDueDates: Flow<List<DueDate>>
     val archivedDueDates: Flow<List<DueDate>>
     val deletedDueDates: Flow<List<DueDate>>
@@ -108,6 +109,7 @@ class DueDateViewModel(application: Application) : AndroidViewModel(application)
         val database = AppDatabase.getDatabase(application)
         repository = DueDateRepository(database.dueDateDao(), database.bankDao())
         activeDueDates = repository.activeDueDates
+        allCalendarBills = repository.allCalendarBills
         archivedDueDates = repository.archivedDueDates
         deletedDueDates = repository.deletedDueDates
         activeBanks = repository.activeBanks

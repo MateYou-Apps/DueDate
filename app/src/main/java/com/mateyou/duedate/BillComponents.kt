@@ -457,7 +457,7 @@ fun PartialPaymentDialog(bill: DueDate, onDismiss: () -> Unit, onConfirm: (Doubl
 
 @Composable
 fun CalendarScreen(viewModel: DueDateViewModel, onBillClick: (DueDate) -> Unit, initialMonthOffset: Int = 0) {
-    val activeDueDates by viewModel.activeDueDates.collectAsState(initial = emptyList())
+    val allCalendarBills by viewModel.allCalendarBills.collectAsState(initial = emptyList())
     val activeBanks by viewModel.activeBanks.collectAsState(initial = emptyList())
 
     val successGreen = if (isSystemInDarkTheme()) SuccessGreenDark else SuccessGreenLight
@@ -477,7 +477,7 @@ fun CalendarScreen(viewModel: DueDateViewModel, onBillClick: (DueDate) -> Unit, 
     }
 
     val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-    val billsThisMonth = activeDueDates.filter { val cal = Calendar.getInstance().apply { timeInMillis = it.dueDate }; cal.get(Calendar.MONTH) == selectedMonth.get(Calendar.MONTH) && cal.get(Calendar.YEAR) == selectedMonth.get(Calendar.YEAR) }
+    val billsThisMonth = allCalendarBills.filter { val cal = Calendar.getInstance().apply { timeInMillis = it.dueDate }; cal.get(Calendar.MONTH) == selectedMonth.get(Calendar.MONTH) && cal.get(Calendar.YEAR) == selectedMonth.get(Calendar.YEAR) }
     
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item { SectionHeader("Calendar"); Spacer(modifier = Modifier.height(24.dp)); Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) { IconButton(onClick = { selectedMonth = (selectedMonth.clone() as Calendar).apply { add(Calendar.MONTH, -1) } }) { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowLeft, "Prev") }; Text(monthFormat.format(selectedMonth.time), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold); IconButton(onClick = { selectedMonth = (selectedMonth.clone() as Calendar).apply { add(Calendar.MONTH, 1) } }) { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, "Next") } }
@@ -490,7 +490,7 @@ fun CalendarScreen(viewModel: DueDateViewModel, onBillClick: (DueDate) -> Unit, 
                 },
                 label = "CalendarFade"
             ) { targetMonth ->
-                CalendarGrid(targetMonth, activeDueDates)
+                CalendarGrid(targetMonth, allCalendarBills)
             }
             
             Spacer(modifier = Modifier.height(16.dp))

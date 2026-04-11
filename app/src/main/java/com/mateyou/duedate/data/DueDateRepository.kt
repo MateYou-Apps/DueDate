@@ -7,6 +7,7 @@ class DueDateRepository(
     private val bankDao: BankDao
 ) {
     val activeDueDates: Flow<List<DueDate>> = dueDateDao.getActiveDueDates()
+    val allCalendarBills: Flow<List<DueDate>> = dueDateDao.getAllCalendarBills()
     val archivedDueDates: Flow<List<DueDate>> = dueDateDao.getArchivedDueDates()
     val deletedDueDates: Flow<List<DueDate>> = dueDateDao.getDeletedDueDates()
 

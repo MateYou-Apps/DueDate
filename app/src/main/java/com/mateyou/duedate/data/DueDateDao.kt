@@ -11,6 +11,9 @@ interface DueDateDao {
     @Query("SELECT * FROM due_dates WHERE isArchived = 0 AND isDeleted = 0 ORDER BY isPaid ASC, dueDate ASC")
     fun getActiveDueDates(): Flow<List<DueDate>>
 
+    @Query("SELECT * FROM due_dates WHERE isDeleted = 0 ORDER BY dueDate ASC")
+    fun getAllCalendarBills(): Flow<List<DueDate>>
+
     @Query("SELECT * FROM due_dates WHERE isDeleted = 0")
     suspend fun getNonDeletedDueDatesSync(): List<DueDate>
 

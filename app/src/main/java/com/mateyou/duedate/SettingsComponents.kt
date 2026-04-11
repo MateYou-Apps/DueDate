@@ -254,6 +254,8 @@ fun ArchiveTrashOverlay(
                                         }, modifier = Modifier.weight(1f)) { Icon(Icons.Default.Restore, "Restore") }
                                         ActionSeparator()
                                         IconButton(onClick = { billToConfirmActionLocal = bill to "archive" }, modifier = Modifier.weight(1f)) { Icon(Icons.Default.Archive, "Archive") }
+                                        ActionSeparator()
+                                        IconButton(onClick = { billToConfirmActionLocal = bill to "permanent_delete" }, modifier = Modifier.weight(1f)) { Icon(Icons.Default.DeleteForever, "Delete Permanently", tint = MaterialTheme.colorScheme.error) }
                                     }
                                 }
                             )
@@ -268,10 +270,14 @@ fun ArchiveTrashOverlay(
         }
 
         billToConfirmActionLocal?.let { (bill, action) ->
+            val titleText = when(action) { "archive" -> "Archive Bill?"; "delete" -> "Move to Trash?"; "permanent_delete" -> "Delete Permanently?"; else -> "" }
+            val bodyText = when(action) { "archive" -> "This bill will be moved to the archive."; "delete" -> "This bill will be moved to the trash."; "permanent_delete" -> "This entry cannot be retrieved once deleted permanently."; else -> "" }
+            val confirmText = when(action) { "archive" -> "Archive"; "delete" -> "Trash"; "permanent_delete" -> "Delete"; else -> "Confirm" }
+
             AlertDialog(
                 onDismissRequest = { billToConfirmActionLocal = null },
-                title = { Text(if (action == "archive") "Archive Bill?" else "Move to Trash?") },
-                text = { Text(if (action == "archive") "This bill will be moved to the archive." else "This bill will be moved to the trash.") },
+                title = { Text(titleText) },
+                text = { Text(bodyText) },
                 confirmButton = {
                     TextButton(onClick = {
                         scope.launch {
@@ -279,10 +285,14 @@ fun ArchiveTrashOverlay(
                             billToAnimateIdLocal = id
                             billToConfirmActionLocal = null
                             delay(350)
-                            if (action == "archive") viewModel.archive(id) else viewModel.delete(id)
+                            when(action) {
+                                "archive" -> viewModel.archive(id)
+                                "delete" -> viewModel.delete(id)
+                                "permanent_delete" -> viewModel.deletePermanently(id)
+                            }
                             billToAnimateIdLocal = null
                         }
-                    }) { Text(if (action == "archive") "Archive" else "Trash") }
+                    }) { Text(confirmText) }
                 },
                 dismissButton = { TextButton(onClick = { billToConfirmActionLocal = null }) { Text("Cancel") } }
             )
