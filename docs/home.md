@@ -1,35 +1,19 @@
-# DueDate
-
-<p align="center">
-  <img src="docs/assets/icon.png" alt="App Icon" width="128"/>
-</p>
-
 <p align="center">
   <strong>Smart Bill Tracking. 100% Offline.</strong><br>
   Automated bill detection from SMS with a modern Material You interface.
 </p>
 
-<p align="center">
-    <a href="https://github.com/MateYou-Apps/DueDate/releases/latest">
-        <img src="https://img.shields.io/github/v/release/MateYou-Apps/DueDate?include_prereleases&logo=github&style=for-the-badge&color=green&label=Latest%20Release" alt="Release">
-    </a>
-    <a href="https://github.com/MateYou-Apps/DueDate/releases">
-        <img src="https://img.shields.io/github/downloads/MateYou-Apps/DueDate/total?logo=github&style=for-the-badge&color=blue&label=Downloads" alt="Downloads">
-    </a>
-    <a href="https://github.com/MateYou-Apps/DueDate/releases">
-        <img src="https://img.shields.io/github/license/MateYou-Apps/DueDate?style=for-the-badge&color=orange&label=License" alt="License">
-    </a>
-</p>
+<br>
 
 <p align="center">
-  <img src="docs/assets/screenshots/0.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/3.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/4.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/5.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/6.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/7.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/8.png" width="23%" style="border-radius:12px; margin: 1px;">
-  <img src="docs/assets/screenshots/9.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/0.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/3.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/4.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/5.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/6.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/7.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/8.png" width="23%" style="border-radius:12px; margin: 1px;">
+  <img src="assets/screenshots/9.png" width="23%" style="border-radius:12px; margin: 1px;">
 </p>
 
 ## Core Features
@@ -53,22 +37,6 @@ DueDate is designed to simplify your financial life by automating credit card bi
 - **Biometric Security:** Protect your sensitive financial information with an optional app lock using Fingerprint.
 - **Material You:** Fully supports dynamic theming. The app adapts to your wallpaper for a personalized aesthetic.
 - **Portable Backups:** Export and import backups of your bills, banks, and custom configurations.
-
-<br>
-
-
-<p align="center">
-    <a href="https://mateyou-apps.github.io/DueDate/#user-guide" target="_blank">
-        <img src="https://img.shields.io/badge/User%20Guide-AAEEAA?style=for-the-badge&logo=googlekeep&logoColor=000000" alt="User Guide">
-    </a>
-    <a href="https://mateyou-apps.github.io/DueDate/#credits" target="_blank">
-        <img src="https://img.shields.io/badge/Credits-AAEEAA?style=for-the-badge&logo=readcv&logoColor=000000" alt="Credits">
-    </a>
-    <a href="https://mateyou-apps.github.io/DueDate/#privacy" target="_blank">
-        <img src="https://img.shields.io/badge/Terms%20%26%20Privacy-AAEEAA?style=for-the-badge&logo=googledocs&logoColor=000000" alt="Terms & Privacy">
-    </a>
-</p>
-
 
 <br>
 

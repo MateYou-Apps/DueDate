@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DueDate - Smart Bill Tracking</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --brand-green: #AAEEAA;
+            --on-brand-green: #002106;
+            --bg: #FDFDF6;
+            --on-bg: #1A1C18;
+            --surface: #F3F4E9;
+            --on-surface: #1A1C18;
+            --outline: #74796D;
+            --outline-variant: #C4C8BB;
+            --primary-container: #CEE9C8;
+            --on-primary-container: #002106;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg: #1A1C18;
+            --on-bg: #E3E3DC;
+            --surface: #2E312C;
+            --on-surface: #E3E3DC;
+            --outline: #8E9286;
+            --outline-variant: #44483D;
+            --primary-container: #334B32;
+            --on-primary-container: #CEE9C8;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * { box-sizing: border-box; transition: background-color 0.3s, color 0.2s; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--on-bg);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--outline-variant);
+            z-index: 2000;
+            padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--on-bg);
+            z-index: 3001;
+            margin-right: auto;
+        }
+
+        .brand img { width: 40px; height: 40px; border-radius: 10px; cursor: pointer; }
+        .brand span { font-weight: 700; font-size: 1.25rem; letter-spacing: -0.5px; pointer-events: none; }
+
+        /* Navigation Buttons */
+        nav { display: flex; align-items: center; gap: 4px; }
+        nav a {
+            text-decoration: none;
+            color: var(--on-surface);
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        nav a.active { background-color: var(--brand-green); color: var(--on-brand-green); font-weight: 700; }
+
+        .home-icon-btn {
+            width: 40px;
+            height: 40px;
+            padding: 8px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50% !important;
+        }
+
+        /* Hamburger Menu UI */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--on-surface);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 3001;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .menu-toggle:hover { background-color: var(--surface); }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open { visibility: visible; opacity: 1; transform: scale(1); }
+        .mobile-nav a {
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--on-bg);
+            padding: 12px 40px;
+            border-radius: 40px;
+        }
+        .mobile-nav a.active { color: var(--on-brand-green); background-color: var(--brand-green); font-weight: 700; }
+
+        /* Content Styling */
+        main {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            flex: 1;
+        }
+
+        #content h1, #content h2, #content h3 { color: var(--on-bg); margin-top: 3.5rem; }
+
+        #content a {
+            color: inherit;
+            text-decoration: none;
+            box-shadow: inset 0 -0.4em 0 var(--brand-green);
+            transition: box-shadow 0.2s;
+            font-weight: 500;
+        }
+        [data-theme="dark"] #content a { box-shadow: inset 0 -0.4em 0 #2D442C; }
+        #content a:hover { box-shadow: inset 0 -0.4em 0 var(--brand-green); }
+        [data-theme="dark"] #content a:hover { box-shadow: inset 0 -0.8em 0 #3D5C3B; }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--surface);
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid var(--outline-variant);
+            font-size: 1em;
+            color: var(--on-surface);
+            word-break: break-all;
+        }
+
+        pre {
+            background-color: var(--surface);
+            padding: 1rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid var(--outline-variant);
+        }
+        pre code { background: none; border: none; padding: 0; }
+
+        #content blockquote {
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+            margin: 2.5rem 0;
+            padding: 1.75rem;
+            border-radius: 28px;
+            border-left: none;
+        }
+
+        #content blockquote h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem !important;
+            font-weight: 700;
+        }
+
+        #content blockquote p {
+            margin: 0 !important;
+            display: block;
+            line-height: 1.4;
+        }
+
+        #content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 12px 32px var(--shadow);
+            cursor: zoom-in;
+        }
+
+        .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 1.5rem 0; }
+        .btn-outlined {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            border: 1px solid var(--outline);
+            border-radius: 24px;
+            text-decoration: none !important;
+            color: var(--on-surface) !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: none !important;
+            transition: all 0.2s;
+        }
+        .btn-outlined:hover { background-color: var(--brand-green); border-color: var(--brand-green); color: var(--on-brand-green) !important; }
+        .btn-outlined svg { width: 20px; height: 20px; fill: currentColor; }
+
+        #scroll-top {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            background-color: var(--surface);
+            color: var(--on-surface);
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 16px var(--shadow);
+            border: 1px solid var(--outline-variant);
+            z-index: 999;
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: none;
+            color: var(--on-surface);
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            margin-left: 8px;
+        }
+
+        footer {
+            background-color: var(--surface);
+            padding: 5rem 1.5rem;
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        .footer-container { max-width: 1000px; margin: 0 auto; }
+        .footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
+        .footer-brand img { width: 40px; height: 40px; border-radius: 10px; }
+        .footer-brand h2 { margin: 0; font-size: 1.75rem; font-weight: 700; }
+
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 5000;
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+        .lb-btn {
+            position: absolute; background: none; border: none; color: white;
+            cursor: pointer; padding: 20px; font-size: 2.5rem; opacity: 0.7; transition: opacity 0.2s;
+        }
+        .lb-btn:hover { opacity: 1; }
+        .lb-close { top: 20px; right: 20px; }
+        .lb-prev { left: 20px; }
+        .lb-next { right: 20px; }
+        .lb-counter { position: absolute; bottom: 30px; color: white; font-weight: 700; font-size: 1.1rem; }
+
+        @media (max-width: 800px) {
+            nav { display: none; }
+            .menu-toggle { display: block; }
+            .lb-prev, .lb-next { padding: 10px; font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <button class="menu-toggle" id="menu-btn" onclick="toggleMenu()" title="Toggle Menu">
+                <svg id="hamburger-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <a href="#home" class="brand" onclick="window.location.hash='#home'; return false;">
+                <img src="assets/icon.png" alt="Logo">
+                <span id="page-title">DueDate</span>
+            </a>
+            <nav id="desktop-nav">
+                <a href="#home" id="nav-home" class="home-icon-btn" title="Home">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+                <a href="#user-guide" id="nav-user-guide">User Guide</a>
+                <a href="#privacy" id="nav-privacy">Privacy</a>
+                <a href="#credits" id="nav-credits">Credits</a>
+            </nav>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#home" onclick="toggleMenu()" id="mob-home">Home</a>
+        <a href="#user-guide" onclick="toggleMenu()" id="mob-user-guide">User Guide</a>
+        <a href="#privacy" onclick="toggleMenu()" id="mob-privacy">Privacy</a>
+        <a href="#credits" onclick="toggleMenu()" id="mob-credits">Credits</a>
+    </div>
+
+    <main><div id="content">Loading content...</div></main>
+
+    <div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="if(event.target==this)closeLightbox()">
+        <button class="lb-btn lb-close" onclick="closeLightbox()">&times;</button>
+        <button class="lb-btn lb-prev" onclick="changeImage(-1)">&#10094;</button>
+        <img class="lightbox-img" id="lightbox-img">
+        <div class="lb-counter" id="lb-counter"></div>
+        <button class="lb-btn lb-next" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="assets/icon.png" alt="Logo">
+                <h2>DueDate</h2>
+            </div>
+            <div id="footer-content-area">
+                <div class="btn-row">
+                    <a href="mailto:mateyouapps@gmail.com" class="btn-outlined">
+                        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.791L12 10.212l8.073-6.546C21.69 2.279 24 3.434 24 5.457z"/></svg>
+                        Gmail
+                    </a>
+                    <a href="mailto:mateyou@tuta.io" class="btn-outlined">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m23.993 7.033-5.16 16.755-.043.12a.144.144 0 0 1-.11.091H1.425a.14.14 0 0 1-.13-.191L6.441 6.98a.473.473 0 0 1 .024-.076.134.134 0 0 1 .124-.091H23.82c.14 0 .202.086.173.22zM23.94 4.25 19.885.146c-.178-.173-.192-.144-.384-.144H2.007a.14.14 0 0 0-.14.14c0 .004-.004.061.044.114l.004.005L6 4.393c.096.096.192.12.336.12h17.533c.12 0 .182-.153.072-.263zM4.127 5.805.25 1.95c-.048-.043-.105-.038-.11-.038a.14.14 0 0 0-.14.14v16.975c0 .077.063.14.14.14a.14.14 0 0 0 .13-.092c.004-.005.004-.014.009-.024 0-.004.01-.038.01-.043L4.199 6.164c.048-.144.048-.24-.072-.36z"/></svg>
+                        Tuta
+                    </a>
+                    <a href="https://github.com/MateYou-Apps/DueDate" class="btn-outlined">
+                        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.082.814-.26.814-.577 0-.285-.011-1.04-.017-2.038-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        GitHub
+                    </a>
+                </div>
+                <div id="footer-markdown"></div>
+            </div>
+            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 3rem;">© 2026 DueDate. Privacy First. Offline Always.</p>
+        </div>
+    </footer>
+
+    <script>
+        marked.setOptions({ gfm: true, breaks: true });
+        const contentDiv = document.getElementById('content');
+        const footerMdDiv = document.getElementById('footer-markdown');
+        const mobileNav = document.getElementById('mobile-nav');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const pageTitle = document.getElementById('page-title');
+        let currentFile = '';
+        let currentGroup = [];
+        let currentIndex = 0;
+
+        function toggleMenu() {
+            const isOpen = mobileNav.classList.toggle('open');
+            hamburgerIcon.innerHTML = isOpen
+                ? '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>'
+                : '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+        }
+
+        function slugify(text) {
+            return text.toString().toLowerCase().trim()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+/, '')
+                .replace(/-+$/, '');
+        }
+
+        function openLightbox(img) {
+            const parent = img.closest('p') || img.closest('div') || img.closest('table');
+            currentGroup = parent ? Array.from(parent.querySelectorAll('img')) : [img];
+            currentIndex = currentGroup.indexOf(img);
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('open');
+        }
+
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+
+        function updateLightbox() {
+            const lbImg = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lb-counter');
+            lbImg.src = currentGroup[currentIndex].src;
+            counter.innerText = (currentIndex + 1) + ' / ' + currentGroup.length;
+        }
+
+        function changeImage(step) {
+            currentIndex = (currentIndex + step + currentGroup.length) % currentGroup.length;
+            updateLightbox();
+        }
+
+        async function loadPage() {
+            const hash = window.location.hash.substring(1) || 'home';
+            const hashParts = hash.split('#');
+            const validPages = ['privacy', 'credits', 'user-guide', 'home'];
+
+            let pageName, anchorId;
+            if (validPages.includes(hashParts[0])) {
+                pageName = hashParts[0];
+                anchorId = hashParts.length > 1 ? hashParts.slice(1).join('#') : null;
+            } else {
+                pageName = currentFile || 'home';
+                anchorId = hashParts[0];
+            }
+
+            if (anchorId === 'contact-us') {
+                document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            const isNarrow = window.innerWidth <= 800;
+            if (isNarrow) {
+                const titles = { 'home': 'DueDate', 'user-guide': 'User Guide', 'privacy': 'Privacy & Terms', 'credits': 'Credits' };
+                pageTitle.innerText = titles[pageName] || 'DueDate';
+            } else {
+                pageTitle.innerText = 'DueDate';
+            }
+
+            document.querySelectorAll('nav a, .mobile-nav a').forEach(a => {
+                const href = a.getAttribute('href');
+                a.classList.toggle('active', href === '#' + pageName);
+            });
+
+            if (pageName !== currentFile) {
+                try {
+                    const response = await fetch(`${pageName}.md`);
+                    if (!response.ok) throw new Error();
+                    let md = await response.text();
+                    md = md.replace(/## Contact Us[\s\S]*/i, '').replace(/### Contact Us[\s\S]*/i, '');
+                    contentDiv.innerHTML = marked.parse(md);
+
+                    contentDiv.querySelectorAll('h1, h2, h3').forEach(h => {
+                        let slug = slugify(h.innerText);
+                        if (h.innerText.includes("Experimental Feature")) slug = "experimental-feature---configure-custom-sms-templates";
+                        if (h.innerText.includes("Enabling Autostart")) slug = "enabling-autostart-xiaomi-redmi-poco";
+                        if (h.innerText.includes("Privacy Policy")) slug = "privacy-policy";
+                        if (h.innerText.includes("Terms of Use")) slug = "terms-of-use";
+                        h.id = slug;
+                    });
+
+                    // Fix TOC links to be page-relative
+                    contentDiv.querySelectorAll('a').forEach(a => {
+                        const href = a.getAttribute('href');
+                        if (href && href.startsWith('#') && !validPages.some(p => href === '#' + p || href.startsWith('#' + p + '#'))) {
+                            a.setAttribute('href', '#' + pageName + href);
+                        }
+                    });
+
+                    contentDiv.querySelectorAll('img').forEach(img => {
+                        img.onclick = () => openLightbox(img);
+                    });
+
+                    currentFile = pageName;
+                } catch (e) {
+                    contentDiv.innerHTML = "<h1>404</h1><p>Page not found.</p>";
+                    return;
+                }
+            }
+
+            if (anchorId) {
+                setTimeout(() => {
+                    const el = document.getElementById(anchorId);
+                    if (el) {
+                        const offset = 100;
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = el.getBoundingClientRect().top;
+                        window.scrollTo({ top: elementRect - bodyRect - offset, behavior: "smooth" });
+                    }
+                }, 200);
+            } else if (hashParts.length === 1 && validPages.includes(hashParts[0])) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        async function loadFooter() {
+            try {
+                const res = await fetch('footer.md');
+                let md = await res.text();
+                md = md.replace(/<p align="left">[\s\S]*?<\/p>/i, '').replace(/### Contact Us/i, '');
+                footerMdDiv.innerHTML = marked.parse(md);
+            } catch (e) {}
+        }
+
+        window.onscroll = () => { document.getElementById('scroll-top').style.display = (window.pageYOffset > 300) ? "flex" : "none"; };
+        window.onresize = () => { if (window.innerWidth > 800) pageTitle.innerText = 'DueDate'; else loadPage(); };
+
+        function toggleTheme() { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+        function setTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            const icon = document.getElementById('theme-icon');
+            icon.innerHTML = t === 'dark'
+                ? '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>'
+                : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        window.addEventListener('hashchange', loadPage);
+        window.addEventListener('load', () => { loadPage(); loadFooter(); });
+    </script>
+</body>
+</html>

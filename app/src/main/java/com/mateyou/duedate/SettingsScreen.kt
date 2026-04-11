@@ -20,8 +20,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -657,7 +661,7 @@ fun SettingsScreen(
 
                 ListItem(
                     headlineContent = { Text("DueDate") },
-                    supportingContent = { Text("Version 1.0.2", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
+                    supportingContent = { Text("Version 1.0.3", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
                     leadingContent = { Icon(Icons.Outlined.Info, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable { 
@@ -685,7 +689,7 @@ fun SettingsScreen(
                     trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable {
-                        val intent = Intent(Intent.ACTION_VIEW, "https://nicegist.github.io/a746a7dddc704cb496fd5c938b463926".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, "https://mateyou-apps.github.io/DueDate/#user-guide".toUri())
                         context.startActivity(intent)
                     }.padding(horizontal = 4.dp)
                 )
@@ -696,7 +700,7 @@ fun SettingsScreen(
                     trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable { 
-                        val intent = Intent(Intent.ACTION_VIEW, "https://nicegist.github.io/a639614b1f3b83c8258dc680335e4dc9".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, "https://mateyou-apps.github.io/DueDate/#privacy".toUri())
                         context.startActivity(intent)
                     }.padding(horizontal = 4.dp)
                 )
@@ -707,7 +711,7 @@ fun SettingsScreen(
                     trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable {
-                        val intent = Intent(Intent.ACTION_VIEW, "https://nicegist.github.io/36bdd11f7050b94b38b1342fff686aa8".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, "https://mateyou-apps.github.io/DueDate/#credits".toUri())
                         context.startActivity(intent)
                     }.padding(horizontal = 4.dp)
                 )
