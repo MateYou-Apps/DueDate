@@ -657,7 +657,7 @@ fun SettingsScreen(
 
                 ListItem(
                     headlineContent = { Text("DueDate") },
-                    supportingContent = { Text("Version 1.0", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
+                    supportingContent = { Text("Version 1.0.1", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline) },
                     leadingContent = { Icon(Icons.Outlined.Info, null) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     modifier = Modifier.clickable { 
