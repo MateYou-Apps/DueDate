@@ -56,19 +56,17 @@ DueDate is designed to simplify your financial life by automating credit card bi
 
 <br>
 
-
 <p align="center">
     <a href="https://mateyou-apps.github.io/DueDate/#user-guide" target="_blank">
         <img src="https://img.shields.io/badge/User%20Guide-AAEEAA?style=for-the-badge&logo=googlekeep&logoColor=000000" alt="User Guide">
     </a>
     <a href="https://mateyou-apps.github.io/DueDate/#credits" target="_blank">
-        <img src="https://img.shields.io/badge/Credits-AAEEAA?style=for-the-badge&logo=readcv&logoColor=000000" alt="Credits">
+        <img src="https://img.shields.io/badge/Credits-AAEEAA?style=for-the-badge&logo=stackblitz&logoColor=000000" alt="Credits">
     </a>
     <a href="https://mateyou-apps.github.io/DueDate/#privacy" target="_blank">
         <img src="https://img.shields.io/badge/Terms%20%26%20Privacy-AAEEAA?style=for-the-badge&logo=googledocs&logoColor=000000" alt="Terms & Privacy">
     </a>
 </p>
-
 
 <br>
 
