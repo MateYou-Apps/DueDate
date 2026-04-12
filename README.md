@@ -11,13 +11,13 @@
 
 <p align="center">
     <a href="https://github.com/MateYou-Apps/DueDate/releases/latest">
-        <img src="https://img.shields.io/github/v/release/MateYou-Apps/DueDate?include_prereleases&logo=github&style=for-the-badge&color=green&label=Latest%20Release" alt="Release">
+        <img src="https://img.shields.io/github/v/release/MateYou-Apps/DueDate?include_prereleases&logo=github&style=for-the-badge&color=AAEEAA&label=Release" alt="Release">
     </a>
     <a href="https://github.com/MateYou-Apps/DueDate/releases">
-        <img src="https://img.shields.io/github/downloads/MateYou-Apps/DueDate/total?logo=github&style=for-the-badge&color=blue&label=Downloads" alt="Downloads">
+        <img src="https://img.shields.io/github/downloads/MateYou-Apps/DueDate/total?logo=github&style=for-the-badge&color=AAEEAA&label=Downloads" alt="Downloads">
     </a>
-    <a href="https://github.com/MateYou-Apps/DueDate/releases">
-        <img src="https://img.shields.io/github/license/MateYou-Apps/DueDate?style=for-the-badge&color=orange&label=License" alt="License">
+    <a href="https://github.com/MateYou-Apps/DueDate/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/MateYou-Apps/DueDate?logo=github&style=for-the-badge&color=AAEEAA&label=License" alt="License">
     </a>
 </p>
 
@@ -58,14 +58,17 @@ DueDate is designed to simplify your financial life by automating credit card bi
 
 <p align="center">
     <a href="https://mateyou-apps.github.io/DueDate/#user-guide" target="_blank">
-        <img src="https://img.shields.io/badge/User%20Guide-AAEEAA?style=for-the-badge&logo=googlekeep&logoColor=000000" alt="User Guide">
+        <img src="docs/assets/btn_user_guide.svg" alt="User Guide">
     </a>
+    &nbsp;&nbsp;
     <a href="https://mateyou-apps.github.io/DueDate/#credits" target="_blank">
-        <img src="https://img.shields.io/badge/Credits-AAEEAA?style=for-the-badge&logo=stackblitz&logoColor=000000" alt="Credits">
+        <img src="docs/assets/btn_credits.svg" alt="Credits">
     </a>
+    &nbsp;&nbsp;
     <a href="https://mateyou-apps.github.io/DueDate/#privacy" target="_blank">
-        <img src="https://img.shields.io/badge/Terms%20%26%20Privacy-AAEEAA?style=for-the-badge&logo=googledocs&logoColor=000000" alt="Terms & Privacy">
+        <img src="docs/assets/btn_privacy.svg" alt="Privacy & Terms">
     </a>
+    &nbsp;&nbsp;
 </p>
 
 <br>
@@ -82,7 +85,7 @@ Built with modern Android standards for performance and longevity.
 
 ### Data & Integration
 - **Local Database:** [Room](https://developer.android.com/training/data-storage/room) (SQLite)
-- **Home Screen Widgets:** [Jetpack Glance](https://developer.android.com/jetpack/compose/glance)
+- **Home Screen Widgets:** [Jetpack Glance](https://developer.android.com/pack/compose/glance)
 - **SVG Rendering:** [AndroidSVG](https://bigbadaboom.github.io/androidsvg/)
 - **Serialization:** [Gson](https://github.com/google/gson)
 

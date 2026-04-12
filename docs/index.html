@@ -135,6 +135,20 @@
         }
 
         .mobile-nav.open { visibility: visible; opacity: 1; transform: scale(1); }
+
+        .mobile-nav .close-btn {
+            display: block;
+            position: absolute;
+            top: 0.75rem;
+            left: 1rem;
+            opacity: 0;
+            transition: opacity 0s;
+        }
+        .mobile-nav.open .close-btn {
+            opacity: 1;
+            transition: opacity 2.5s ease;
+        }
+
         .mobile-nav a {
             font-size: 1.75rem;
             font-weight: 700;
@@ -298,7 +312,8 @@
 
         @media (max-width: 800px) {
             nav { display: none; }
-            .menu-toggle { display: block; }
+            .menu-toggle { display: block; margin-right: 8px; }
+            .brand { margin-right: auto; }
             .lb-prev, .lb-next { padding: 10px; font-size: 2rem; }
         }
     </style>
@@ -308,7 +323,7 @@
     <header>
         <div class="header-content">
             <button class="menu-toggle" id="menu-btn" onclick="toggleMenu()" title="Toggle Menu">
-                <svg id="hamburger-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
@@ -333,6 +348,11 @@
     </header>
 
     <div class="mobile-nav" id="mobile-nav">
+        <button class="menu-toggle close-btn" onclick="toggleMenu()" title="Close Menu">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
         <a href="#home" onclick="toggleMenu()" id="mob-home">Home</a>
         <a href="#user-guide" onclick="toggleMenu()" id="mob-user-guide">User Guide</a>
         <a href="#privacy" onclick="toggleMenu()" id="mob-privacy">Privacy</a>
@@ -385,17 +405,13 @@
         const contentDiv = document.getElementById('content');
         const footerMdDiv = document.getElementById('footer-markdown');
         const mobileNav = document.getElementById('mobile-nav');
-        const hamburgerIcon = document.getElementById('hamburger-icon');
         const pageTitle = document.getElementById('page-title');
         let currentFile = '';
         let currentGroup = [];
         let currentIndex = 0;
 
         function toggleMenu() {
-            const isOpen = mobileNav.classList.toggle('open');
-            hamburgerIcon.innerHTML = isOpen
-                ? '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>'
-                : '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            mobileNav.classList.toggle('open');
         }
 
         function slugify(text) {
